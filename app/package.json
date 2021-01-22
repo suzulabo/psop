@@ -1,0 +1,17 @@
+{
+  "name": "psap-app",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf www && stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watch",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@stencil/core": "^2.3.0",
+    "@stencil/sass": "^1.4.1",
+    "stencil-router-v2": "^0.6.0",
+    "workbox-build": "^4.3.1"
+  }
+}
