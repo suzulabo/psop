@@ -14,9 +14,15 @@ export class AppHome {
     return (
       <Host>
         <div class="lniks">
-          <a {...href('keygen')}>{this.app.msgs.home.keygen}</a>
-          <a {...href('encrypt')}>{this.app.msgs.home.encrypt}</a>
-          <a {...href('decrypt')}>{this.app.msgs.home.decrypt}</a>
+          <a class="button" {...href('keygen')}>
+            {this.app.msgs.home.keygen}
+          </a>
+          <a class="button" {...href('encrypt')}>
+            {this.app.msgs.home.encrypt}
+          </a>
+          <a class="button" {...href('decrypt')}>
+            {this.app.msgs.home.decrypt}
+          </a>
         </div>
       </Host>
     );
