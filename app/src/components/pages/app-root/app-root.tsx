@@ -1,5 +1,6 @@
 import { Component, h, Host } from '@stencil/core';
 import { App } from 'src/app/app';
+import { AppEncryption } from 'src/app/encryption';
 import { AppMsg } from 'src/app/msg';
 import { createRouter, Route } from 'stencil-router-v2';
 
@@ -14,7 +15,8 @@ export class AppRoot {
 
   componentWillLoad() {
     const appMsg = new AppMsg();
-    this.app = new App(appMsg);
+    const appEncryption = new AppEncryption();
+    this.app = new App(appMsg, appEncryption);
   }
 
   render() {
@@ -23,6 +25,9 @@ export class AppRoot {
         <Router.Switch>
           <Route path="/">
             <app-home app={this.app}></app-home>
+          </Route>
+          <Route path="/keygen">
+            <app-keygen app={this.app}></app-keygen>
           </Route>
         </Router.Switch>
       </Host>

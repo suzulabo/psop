@@ -7,18 +7,36 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { App } from "src/app/app";
 export namespace Components {
+    interface ApIcon {
+        "icon": 'clipboard';
+    }
     interface AppHome {
+        "app": App;
+    }
+    interface AppKeygen {
         "app": App;
     }
     interface AppRoot {
     }
 }
 declare global {
+    interface HTMLApIconElement extends Components.ApIcon, HTMLStencilElement {
+    }
+    var HTMLApIconElement: {
+        prototype: HTMLApIconElement;
+        new (): HTMLApIconElement;
+    };
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
     }
     var HTMLAppHomeElement: {
         prototype: HTMLAppHomeElement;
         new (): HTMLAppHomeElement;
+    };
+    interface HTMLAppKeygenElement extends Components.AppKeygen, HTMLStencilElement {
+    }
+    var HTMLAppKeygenElement: {
+        prototype: HTMLAppKeygenElement;
+        new (): HTMLAppKeygenElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -27,18 +45,28 @@ declare global {
         new (): HTMLAppRootElement;
     };
     interface HTMLElementTagNameMap {
+        "ap-icon": HTMLApIconElement;
         "app-home": HTMLAppHomeElement;
+        "app-keygen": HTMLAppKeygenElement;
         "app-root": HTMLAppRootElement;
     }
 }
 declare namespace LocalJSX {
+    interface ApIcon {
+        "icon"?: 'clipboard';
+    }
     interface AppHome {
+        "app"?: App;
+    }
+    interface AppKeygen {
         "app"?: App;
     }
     interface AppRoot {
     }
     interface IntrinsicElements {
+        "ap-icon": ApIcon;
         "app-home": AppHome;
+        "app-keygen": AppKeygen;
         "app-root": AppRoot;
     }
 }
@@ -46,7 +74,9 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "ap-icon": LocalJSX.ApIcon & JSXBase.HTMLAttributes<HTMLApIconElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
+            "app-keygen": LocalJSX.AppKeygen & JSXBase.HTMLAttributes<HTMLAppKeygenElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
         }
     }
