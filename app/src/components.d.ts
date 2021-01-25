@@ -8,7 +8,12 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { App } from "src/app/app";
 export namespace Components {
     interface ApIcon {
-        "icon": 'clipboard';
+        "icon": 'clipboard' | 'x' | 'shield-lock';
+    }
+    interface ApLoading {
+    }
+    interface AppEncrypt {
+        "app": App;
     }
     interface AppHome {
         "app": App;
@@ -25,6 +30,18 @@ declare global {
     var HTMLApIconElement: {
         prototype: HTMLApIconElement;
         new (): HTMLApIconElement;
+    };
+    interface HTMLApLoadingElement extends Components.ApLoading, HTMLStencilElement {
+    }
+    var HTMLApLoadingElement: {
+        prototype: HTMLApLoadingElement;
+        new (): HTMLApLoadingElement;
+    };
+    interface HTMLAppEncryptElement extends Components.AppEncrypt, HTMLStencilElement {
+    }
+    var HTMLAppEncryptElement: {
+        prototype: HTMLAppEncryptElement;
+        new (): HTMLAppEncryptElement;
     };
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
     }
@@ -46,6 +63,8 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "ap-icon": HTMLApIconElement;
+        "ap-loading": HTMLApLoadingElement;
+        "app-encrypt": HTMLAppEncryptElement;
         "app-home": HTMLAppHomeElement;
         "app-keygen": HTMLAppKeygenElement;
         "app-root": HTMLAppRootElement;
@@ -53,7 +72,12 @@ declare global {
 }
 declare namespace LocalJSX {
     interface ApIcon {
-        "icon"?: 'clipboard';
+        "icon"?: 'clipboard' | 'x' | 'shield-lock';
+    }
+    interface ApLoading {
+    }
+    interface AppEncrypt {
+        "app"?: App;
     }
     interface AppHome {
         "app"?: App;
@@ -65,6 +89,8 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "ap-icon": ApIcon;
+        "ap-loading": ApLoading;
+        "app-encrypt": AppEncrypt;
         "app-home": AppHome;
         "app-keygen": AppKeygen;
         "app-root": AppRoot;
@@ -75,6 +101,8 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "ap-icon": LocalJSX.ApIcon & JSXBase.HTMLAttributes<HTMLApIconElement>;
+            "ap-loading": LocalJSX.ApLoading & JSXBase.HTMLAttributes<HTMLApLoadingElement>;
+            "app-encrypt": LocalJSX.AppEncrypt & JSXBase.HTMLAttributes<HTMLAppEncryptElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-keygen": LocalJSX.AppKeygen & JSXBase.HTMLAttributes<HTMLAppKeygenElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;

@@ -29,6 +29,9 @@ export class AppRoot {
           <Route path="/keygen">
             <app-keygen app={this.app}></app-keygen>
           </Route>
+          <Route path="/encrypt">
+            <app-encrypt app={this.app}></app-encrypt>
+          </Route>
         </Router.Switch>
       </Host>
     );

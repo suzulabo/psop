@@ -15,4 +15,11 @@ export const msgs = {
     publicPasswd: '教えるパスワード',
     secretPasswd: '秘密のパスワード',
   },
+  encrypt: {
+    title: '暗号化',
+    addBtn: 'ファイルを選択',
+    publicPasswd: '教わったパスワードを貼り付け',
+    encryptBtn: '暗号化',
+    download: 'ダウンロード',
+  },
 };

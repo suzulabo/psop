@@ -14,13 +14,13 @@ export class AppHome {
     return (
       <Host>
         <div class="lniks">
-          <a class="button" {...href('keygen')}>
+          <a class="button full-width" {...href('keygen')}>
             {this.app.msgs.home.keygen}
           </a>
-          <a class="button" {...href('encrypt')}>
+          <a class="button full-width" {...href('encrypt')}>
             {this.app.msgs.home.encrypt}
           </a>
-          <a class="button" {...href('decrypt')}>
+          <a class="button full-width" {...href('decrypt')}>
             {this.app.msgs.home.decrypt}
           </a>
         </div>
