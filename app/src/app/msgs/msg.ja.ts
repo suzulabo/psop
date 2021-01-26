@@ -31,7 +31,9 @@ export const msgs = {
   errors: {
     decryptFile: {
       fileFormat: '暗号化されたファイルではありません',
-      passwd: 'パスワードが違います',
+      passwd: (pubKey: string) => {
+        return `パスワードが違います\n(教えたパスワード: ${pubKey.substr(0, 5)}***)`;
+      },
       decrypt: '解除に失敗しました',
     },
   },

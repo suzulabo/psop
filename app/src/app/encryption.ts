@@ -104,11 +104,18 @@ export class AppEncryption {
       return this.errMsgs.decryptFile.fileFormat;
     }
 
-    headerReader.readBytes(nacl.box.publicKeyLength); // recipientPubKey
+    const recipientPubKey = headerReader.readBytes(nacl.box.publicKeyLength); // recipientPubKey
     const senderPubKey = headerReader.readBytes(nacl.box.publicKeyLength);
     const nonce = headerReader.readBytes(nacl.secretbox.nonceLength);
     const secret = fromBase32(secretCode);
     const secretKey = deriveSecretKey(secret, passPhrase);
+    {
+      const pair = nacl.box.keyPair.fromSecretKey(secretKey);
+      const pubKey32 = toBase32(recipientPubKey);
+      if (pubKey32 != toBase32(pair.publicKey)) {
+        return this.errMsgs.decryptFile.passwd(pubKey32);
+      }
+    }
 
     cb('read', 0);
     const encrypted = await readFile(file.slice(FILE_HEADER_SIZE), loaded => {
