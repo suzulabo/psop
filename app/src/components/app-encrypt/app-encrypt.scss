@@ -9,65 +9,41 @@ app-encrypt {
     margin: 20px auto;
   }
 
-  .add-box {
-    text-align: center;
-    input {
-      display: none;
-    }
-  }
-
-  .files-block {
-    max-width: 600px;
-    margin: 10px auto 0;
-  }
-
-  .files-box {
-    .file {
-      padding: 5px;
-      border-bottom: 1px dashed black;
-      display: flex;
-      align-items: center;
-
-      .name {
-        word-break: break-word;
-      }
-
-      .size {
-        margin: 0 5px;
-        font-size: 0.9rem;
-        flex-grow: 1;
-        white-space: nowrap;
-      }
-
-      a-button {
-        padding: 5px;
-        font-size: 24px;
-      }
-
-      &:last-of-type {
-        border-bottom-width: 0;
-      }
-    }
-  }
-
-  .total-box {
-    margin-top: 10px;
-    border-top: 1px solid black;
-    padding-top: 10px;
-    text-align: right;
-    font-size: 1.1rem;
-  }
-
-  .pubkey-block {
-    max-width: 600px;
+  section.passwd {
+    max-width: 400px;
     margin: 30px auto 0;
     input {
       text-align: center;
     }
   }
 
-  .encrypt-btn {
+  section.file-select {
     text-align: center;
+    input {
+      display: none;
+    }
+  }
+
+  section.download {
+    text-align: center;
+    margin: 20px auto;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto 0;
+      width: fit-content;
+      border: none;
+      ap-icon {
+        font-size: 50px;
+        margin-bottom: 5px;
+      }
+      span {
+        text-decoration: underline;
+      }
+    }
   }
 
   ap-loading {
@@ -84,38 +60,8 @@ app-encrypt {
     }
   }
 
-  .back-btn {
-    margin-top: 20px;
+  section.back-btn {
+    margin-top: 30px;
     text-align: center;
   }
 }
-
-/*
-
-  .key-box {
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto 0;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 10px;
-
-    legend {
-      font-size: 1.1rem;
-      padding: 5px 10px 0;
-    }
-
-    textarea {
-      resize: none;
-      width: 100%;
-      text-align: center;
-      height: 2.5em;
-    }
-
-    &:focus-within {
-      border-width: 2px;
-    }
-  }
-
-
-*/

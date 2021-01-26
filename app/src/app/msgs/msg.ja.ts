@@ -17,9 +17,8 @@ export const msgs = {
   },
   encrypt: {
     title: '暗号化',
-    addBtn: 'ファイルを選択',
     publicPasswd: '教わったパスワードを貼り付け',
-    encryptBtn: '暗号化',
-    download: 'ダウンロード',
+    fileSelectBtn: 'ファイルを選択',
+    completed: '暗号化が完了しました！',
   },
 };

@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { App } from "src/app/app";
 export namespace Components {
     interface ApIcon {
-        "icon": 'clipboard' | 'x' | 'shield-lock';
+        "icon": 'clipboard' | 'x' | 'shield-lock' | 'download';
     }
     interface ApLoading {
     }
@@ -72,7 +72,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface ApIcon {
-        "icon"?: 'clipboard' | 'x' | 'shield-lock';
+        "icon"?: 'clipboard' | 'x' | 'shield-lock' | 'download';
     }
     interface ApLoading {
     }

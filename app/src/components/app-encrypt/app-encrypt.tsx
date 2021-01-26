@@ -1,6 +1,5 @@
-import { Component, Fragment, h, Host, Prop, State } from '@stencil/core';
+import { Component, h, Host, Prop, State } from '@stencil/core';
 import { App } from 'src/app/app';
-import { humanFileSize } from 'src/app/utils';
 import { href } from 'stencil-router-v2';
 
 @Component({
@@ -12,16 +11,13 @@ export class AppEncrypt {
   app: App;
 
   @State()
-  files: File[] = [];
-
-  @State()
   passwd: string;
 
   @State()
   encrypting = false;
 
   @State()
-  downloadURL: string;
+  encrypted: { name: string; url: string };
 
   private fileInput: HTMLInputElement;
   private handleFileInpuretRef = (el: HTMLInputElement) => {
@@ -33,134 +29,85 @@ export class AppEncrypt {
   }
 
   private clearDownloadURL() {
-    if (this.downloadURL) {
-      URL.revokeObjectURL(this.downloadURL);
-      this.downloadURL = null;
+    if (this.encrypted) {
+      URL.revokeObjectURL(this.encrypted.url);
+      this.encrypted = undefined;
     }
   }
-
-  private handleAddBtnClick = () => {
-    this.fileInput.click();
-  };
-
-  private handleFileInputChange = () => {
-    const files = this.fileInput.files;
-    if (files.length == 0) {
-      return;
-    }
-    const newFiles = [...this.files];
-    for (let i = 0; i < files.length; i++) {
-      const file = files.item(i);
-      if (
-        !newFiles.find(f => {
-          return f.name == file.name && f.size == file.size;
-        })
-      ) {
-        newFiles.push(file);
-      }
-    }
-    this.files = newFiles;
-    this.fileInput.value = '';
-  };
-
-  private handleDeleteBtnClick = (event: Event) => {
-    const el = event.currentTarget as HTMLElement;
-    const index = parseInt(el.getAttribute('data-index'));
-    this.files = this.files.filter((_, i) => {
-      return i != index;
-    });
-  };
 
   private handlePasswdInput = (event: Event) => {
     const el = event.currentTarget as HTMLInputElement;
     this.passwd = el.value;
   };
 
-  private handleEncryptBtnClick = async () => {
+  private handleFileSelectBtnClick = () => {
+    this.fileInput.click();
+  };
+
+  private handleFileInputChange = async () => {
+    const inputFiles = this.fileInput.files;
+    if (inputFiles.length == 0) {
+      return;
+    }
+    const files = [] as File[];
+    for (let i = 0; i < inputFiles.length; i++) {
+      const file = inputFiles.item(i);
+      files.push(file);
+    }
+    this.fileInput.value = '';
+
     this.encrypting = true;
     try {
-      const encrypted = await this.app.encryption.encryptFiles(this.files, this.passwd, () => {});
+      const encrypted = await this.app.encryption.encryptFiles(files, this.passwd, () => {});
       this.clearDownloadURL();
-      this.downloadURL = URL.createObjectURL(encrypted);
+      this.encrypted = {
+        name: `${removeExtension(files[0]?.name)}.psop`,
+        url: URL.createObjectURL(encrypted),
+      };
     } finally {
       this.encrypting = false;
     }
   };
 
-  private renderFiles = () => {
-    return this.files.map((v, i) => {
-      return (
-        <div class="file">
-          <span class="name">{v.name}</span>
-          <span class="size">({humanFileSize(v.size)})</span>
-          <button class="icon" data-index={i} onClick={this.handleDeleteBtnClick}>
-            <ap-icon icon="x" />
-          </button>
-        </div>
-      );
-    });
-  };
-
   render() {
-    const totalSize = this.files.reduce((n, f) => {
-      return n + f.size;
-    }, 0);
-
     const canEncrypt =
-      this.files.length > 0 &&
-      this.passwd &&
-      this.passwd.match(/^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{52}$/);
+      this.passwd && !!this.passwd.match(/^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{52}$/);
 
     return (
       <Host>
         <header>{this.app.msgs.encrypt.title}</header>
         <main>
-          <div class="add-box">
-            <button onClick={this.handleAddBtnClick}>{this.app.msgs.encrypt.addBtn}</button>
+          <section class="passwd">
+            <input
+              type="password"
+              placeholder={this.app.msgs.encrypt.publicPasswd}
+              value={this.passwd}
+              onInput={this.handlePasswdInput}
+            ></input>
+          </section>
+          <section class="file-select">
+            <button onClick={this.handleFileSelectBtnClick} disabled={!canEncrypt}>
+              {this.app.msgs.encrypt.fileSelectBtn}
+            </button>
             <input
               type="file"
               multiple={true}
               ref={this.handleFileInpuretRef}
               onChange={this.handleFileInputChange}
             ></input>
-          </div>
-          {this.files.length > 0 && (
-            <Fragment>
-              <div class="files-block">
-                <div class="files-box">{this.renderFiles()}</div>
-                <div class="total-box">Total: {humanFileSize(totalSize)}</div>
-              </div>
-              <div class="pubkey-block">
-                <input
-                  type="password"
-                  placeholder={this.app.msgs.encrypt.publicPasswd}
-                  value={this.passwd}
-                  onInput={this.handlePasswdInput}
-                ></input>
-              </div>
-              {!this.downloadURL && (
-                <div class="encrypt-btn">
-                  <button disabled={!canEncrypt} onClick={this.handleEncryptBtnClick}>
-                    {this.app.msgs.encrypt.encryptBtn}
-                  </button>
-                </div>
-              )}
-              {!!this.downloadURL && (
-                <div class="encrypt-btn">
-                  <a
-                    class="button"
-                    href={this.downloadURL}
-                    download={`${removeExtension(this.files[0]?.name)}.psop`}
-                  >
-                    {this.app.msgs.encrypt.download}
-                  </a>
-                </div>
-              )}
-            </Fragment>
+          </section>
+          {!!this.encrypted && (
+            <section class="download">
+              <div>{this.app.msgs.encrypt.completed}</div>
+              <a class="button" href={this.encrypted.url} download={this.encrypted.name}>
+                <ap-icon icon="download" />
+                <span>{this.encrypted.name}</span>
+              </a>
+            </section>
           )}
-          <div class="back-btn">
+          <section class="back-btn">
             <a {...href('/')}>{this.app.msgs.common.back}</a>
-          </div>
+          </section>
         </main>
         {this.encrypting && (
           <ap-loading>
