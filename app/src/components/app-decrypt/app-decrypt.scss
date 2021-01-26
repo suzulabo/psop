@@ -1,0 +1,65 @@
+app-decrypt {
+  header {
+    padding: 20px;
+    text-align: center;
+  }
+
+  main {
+    padding: 10px;
+    margin: 20px auto;
+  }
+
+  section.user-passwd,
+  section.secret-passwd {
+    max-width: 400px;
+    margin: 30px auto 0;
+    input {
+      text-align: center;
+    }
+  }
+
+  section.file-select {
+    text-align: center;
+    input {
+      display: none;
+    }
+  }
+
+  section.err {
+    text-align: center;
+    margin: 20px auto;
+    font-weight: bold;
+  }
+
+  section.download {
+    text-align: center;
+    margin: 20px auto;
+
+    .files {
+      margin-top: 20px;
+      a {
+        font-size: 1.1rem;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  ap-loading {
+    ap-icon {
+      font-size: 50px;
+
+      animation: blink 1s linear infinite;
+
+      @keyframes blink {
+        50% {
+          opacity: 0.1;
+        }
+      }
+    }
+  }
+
+  section.back-btn {
+    margin-top: 30px;
+    text-align: center;
+  }
+}

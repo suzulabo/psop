@@ -15,7 +15,7 @@ export class AppRoot {
 
   componentWillLoad() {
     const appMsg = new AppMsg();
-    const appEncryption = new AppEncryption();
+    const appEncryption = new AppEncryption(appMsg);
     this.app = new App(appMsg, appEncryption);
   }
 
@@ -31,6 +31,9 @@ export class AppRoot {
           </Route>
           <Route path="/encrypt">
             <app-encrypt app={this.app}></app-encrypt>
+          </Route>
+          <Route path="/decrypt">
+            <app-decrypt app={this.app}></app-decrypt>
           </Route>
         </Router.Switch>
       </Host>

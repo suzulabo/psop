@@ -12,6 +12,9 @@ export namespace Components {
     }
     interface ApLoading {
     }
+    interface AppDecrypt {
+        "app": App;
+    }
     interface AppEncrypt {
         "app": App;
     }
@@ -36,6 +39,12 @@ declare global {
     var HTMLApLoadingElement: {
         prototype: HTMLApLoadingElement;
         new (): HTMLApLoadingElement;
+    };
+    interface HTMLAppDecryptElement extends Components.AppDecrypt, HTMLStencilElement {
+    }
+    var HTMLAppDecryptElement: {
+        prototype: HTMLAppDecryptElement;
+        new (): HTMLAppDecryptElement;
     };
     interface HTMLAppEncryptElement extends Components.AppEncrypt, HTMLStencilElement {
     }
@@ -64,6 +73,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "ap-icon": HTMLApIconElement;
         "ap-loading": HTMLApLoadingElement;
+        "app-decrypt": HTMLAppDecryptElement;
         "app-encrypt": HTMLAppEncryptElement;
         "app-home": HTMLAppHomeElement;
         "app-keygen": HTMLAppKeygenElement;
@@ -75,6 +85,9 @@ declare namespace LocalJSX {
         "icon"?: 'clipboard' | 'x' | 'shield-lock' | 'download';
     }
     interface ApLoading {
+    }
+    interface AppDecrypt {
+        "app"?: App;
     }
     interface AppEncrypt {
         "app"?: App;
@@ -90,6 +103,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "ap-icon": ApIcon;
         "ap-loading": ApLoading;
+        "app-decrypt": AppDecrypt;
         "app-encrypt": AppEncrypt;
         "app-home": AppHome;
         "app-keygen": AppKeygen;
@@ -102,6 +116,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "ap-icon": LocalJSX.ApIcon & JSXBase.HTMLAttributes<HTMLApIconElement>;
             "ap-loading": LocalJSX.ApLoading & JSXBase.HTMLAttributes<HTMLApLoadingElement>;
+            "app-decrypt": LocalJSX.AppDecrypt & JSXBase.HTMLAttributes<HTMLAppDecryptElement>;
             "app-encrypt": LocalJSX.AppEncrypt & JSXBase.HTMLAttributes<HTMLAppEncryptElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-keygen": LocalJSX.AppKeygen & JSXBase.HTMLAttributes<HTMLAppKeygenElement>;

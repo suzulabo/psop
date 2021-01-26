@@ -1,14 +1,25 @@
 import base32Decode from 'base32-decode';
 import base32Encode from 'base32-encode';
+import { workerDecrypt } from 'src/workers/decrypt.worker';
 import { workerEncrypt } from 'src/workers/encrypt.worker';
 import nacl from 'tweetnacl';
+import { DataReader } from './datareader';
 import { DataWriter } from './datawriter';
+import { AppMsg } from './msg';
 import { concatArray, readFile } from './utils';
 
 const FILE_PREFIX = 'PSOP1';
+const FILE_HEADER_SIZE =
+  FILE_PREFIX.length +
+  nacl.box.publicKeyLength + // recipientPubKey
+  nacl.box.publicKeyLength + // senderPubKey
+  nacl.box.nonceLength; // nonce
 
 const toBase32 = (v: Uint8Array) => {
   return base32Encode(v, 'Crockford');
+};
+const fromBase32 = (v: string) => {
+  return new Uint8Array(base32Decode(v, 'Crockford'));
 };
 
 const deriveSecretKey = (secret: Uint8Array, passwd: string) => {
@@ -18,6 +29,10 @@ const deriveSecretKey = (secret: Uint8Array, passwd: string) => {
 };
 
 export class AppEncryption {
+  constructor(private appMsg: AppMsg) {}
+
+  private errMsgs = this.appMsg.msgs.errors;
+
   generatePair(passwd: string) {
     const secret = nacl.randomBytes(32);
     const secretKey = deriveSecretKey(secret, passwd);
@@ -34,7 +49,7 @@ export class AppEncryption {
     cb: (stage: string, file?: File, val?: number) => void,
   ) {
     const writer = new DataWriter();
-    const recipientPubKey = base32Decode(publicCode, 'Crockford');
+    const recipientPubKey = fromBase32(publicCode);
     const keyPair = nacl.box.keyPair();
 
     writer.writeInt8(1); // version
@@ -68,5 +83,61 @@ export class AppEncryption {
     ]);
 
     return blob;
+  }
+
+  async decryptFile(
+    file: File,
+    secretCode: string,
+    passPhrase: string,
+    cb: (stage: string, val?: number) => void,
+  ) {
+    cb('read_header');
+
+    const header = await readFile(file.slice(0, FILE_HEADER_SIZE));
+    if (header.byteLength < FILE_HEADER_SIZE) {
+      return this.errMsgs.decryptFile.fileFormat;
+    }
+
+    const headerReader = new DataReader(header);
+    const filePrefix = new TextDecoder().decode(headerReader.readBytes(FILE_PREFIX.length));
+    if (filePrefix != FILE_PREFIX) {
+      return this.errMsgs.decryptFile.fileFormat;
+    }
+
+    headerReader.readBytes(nacl.box.publicKeyLength); // recipientPubKey
+    const senderPubKey = headerReader.readBytes(nacl.box.publicKeyLength);
+    const nonce = headerReader.readBytes(nacl.secretbox.nonceLength);
+    const secret = fromBase32(secretCode);
+    const secretKey = deriveSecretKey(secret, passPhrase);
+
+    cb('read', 0);
+    const encrypted = await readFile(file.slice(FILE_HEADER_SIZE), loaded => {
+      cb('read', loaded);
+    });
+    cb('read_end');
+
+    cb('decrypt_begin');
+    const decrypted = await workerDecrypt(
+      encrypted.buffer,
+      nonce.buffer,
+      senderPubKey.buffer,
+      secretKey.buffer,
+    );
+    cb('decrypt_end');
+
+    if (!decrypted) {
+      return this.errMsgs.decryptFile.decrypt;
+    }
+
+    const reader = new DataReader(decrypted);
+    reader.readInt8(); // version
+    const fileCount = reader.readInt32();
+    const files: { filename: string; data: Uint8Array }[] = [];
+    for (let i = 0; i < fileCount; i++) {
+      const filename = reader.readString();
+      const data = reader.readUint8Array();
+      files.push({ filename: filename, data: data });
+    }
+    return files;
   }
 }

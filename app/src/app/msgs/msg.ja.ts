@@ -21,4 +21,18 @@ export const msgs = {
     fileSelectBtn: 'ファイルを選択',
     completed: '暗号化が完了しました！',
   },
+  decrypt: {
+    title: '暗号化解除',
+    userPasswd: 'あなたのパスワードを入力',
+    sercretPasswd: '秘密のパスワードを貼り付け',
+    fileSelectBtn: 'ファイルを選択',
+    completed: '暗号化を解除しました！',
+  },
+  errors: {
+    decryptFile: {
+      fileFormat: '暗号化されたファイルではありません',
+      passwd: 'パスワードが違います',
+      decrypt: '解除に失敗しました',
+    },
+  },
 };
