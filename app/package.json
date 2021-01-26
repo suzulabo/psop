@@ -1,5 +1,5 @@
 {
-  "name": "psap-app",
+  "name": "psop-app",
   "private": true,
   "scripts": {
     "build": "rm -rf www && stencil build",
