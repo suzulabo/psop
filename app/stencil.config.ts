@@ -10,7 +10,10 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'www',
-      serviceWorker: { globPatterns: ['**/*.{js,css,json,html,ico,png}'] },
+      serviceWorker: {
+        swSrc: 'src/sw.js',
+        globPatterns: ['**/*.{js,css,json,html,ico,png}'],
+      },
     },
   ],
   plugins: [sass({})],
