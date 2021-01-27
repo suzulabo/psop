@@ -3,6 +3,9 @@ export const msgs = {
     titleSuffix: ' - パスワード先に送ります',
     back: '戻る',
   },
+  footer: {
+    title: 'パスワード先に送ります',
+  },
   home: {
     title: 'メニュー',
     keygen: 'パスワード作成',

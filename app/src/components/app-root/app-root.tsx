@@ -65,20 +65,33 @@ export class AppRoot {
   render() {
     return (
       <Host>
-        <Router.Switch>
-          <Route path="/">
-            <app-home app={this.app}></app-home>
-          </Route>
-          <Route path="/keygen">
-            <app-keygen app={this.app}></app-keygen>
-          </Route>
-          <Route path="/encrypt">
-            <app-encrypt app={this.app}></app-encrypt>
-          </Route>
-          <Route path="/decrypt">
-            <app-decrypt app={this.app}></app-decrypt>
-          </Route>
-        </Router.Switch>
+        <div class="page">
+          <Router.Switch>
+            <Route path="/">
+              <app-home app={this.app}></app-home>
+            </Route>
+            <Route path="/keygen">
+              <app-keygen app={this.app}></app-keygen>
+            </Route>
+            <Route path="/encrypt">
+              <app-encrypt app={this.app}></app-encrypt>
+            </Route>
+            <Route path="/decrypt">
+              <app-decrypt app={this.app}></app-decrypt>
+            </Route>
+          </Router.Switch>
+        </div>
+        <footer>
+          <div class="title">{this.app.msgs.footer.title}</div>
+          <div class="copy">&copy;suzulabo</div>
+          <div class="build-info">Version: {this.app.buildInfo.src}</div>
+          <div class="build-info">Built at {new Date(this.app.buildInfo.time).toISOString()}</div>
+          <div class="github">
+            <a href="https://github.com/suzulabo/psop">
+              <ap-icon icon="github" />
+            </a>
+          </div>
+        </footer>
       </Host>
     );
   }

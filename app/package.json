@@ -2,14 +2,16 @@
   "name": "psop-app",
   "private": true,
   "scripts": {
-    "build": "rm -rf www && stencil build",
-    "start": "stencil build --dev --watch --serve",
-    "start.sw": "stencil build --dev --watch --serve --service-worker",
+    "srcvar": "echo $(git branch --show-current)/$(git rev-parse --short HEAD)$([ \"$(git status --porcelain)\" ] && echo '+')",
+    "build": "_SRCVAR=$(npm --silent run srcvar) stencil build",
+    "start": "_SRCVAR=$(npm --silent run srcvar) stencil build --dev --watch --serve",
+    "start.sw": "_SRCVAR=$(npm --silent run srcvar) stencil build --dev --watch --serve --service-worker",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watch",
     "generate": "stencil generate"
   },
   "devDependencies": {
+    "@rollup/plugin-replace": "^2.3.4",
     "@stencil/core": "^2.3.0",
     "@stencil/sass": "^1.4.1",
     "base32-decode": "^1.0.0",
