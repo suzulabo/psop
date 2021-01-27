@@ -6,4 +6,8 @@ export class App {
 
   readonly msgs = this.appMsg.msgs;
   readonly encryption = this.appEncryption;
+
+  setTitle(v: string) {
+    document.title = v;
+  }
 }

@@ -43,6 +43,25 @@ export class AppRoot {
     this.app = new App(appMsg, appEncryption);
   }
 
+  componentWillRender() {
+    const suffix = this.app.msgs.common.titleSuffix;
+
+    switch (Router.activePath) {
+      case '/keygen':
+        this.app.setTitle(this.app.msgs.keygen.title + suffix);
+        break;
+      case '/encrypt':
+        this.app.setTitle(this.app.msgs.encrypt.title + suffix);
+        break;
+      case '/decrypt':
+        this.app.setTitle(this.app.msgs.decrypt.title + suffix);
+        break;
+      default:
+        this.app.setTitle(this.app.msgs.home.title + suffix);
+        break;
+    }
+  }
+
   render() {
     return (
       <Host>
