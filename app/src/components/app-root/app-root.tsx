@@ -62,25 +62,23 @@ export class AppRoot {
     }
   }
 
+  private renderRoute(Tag: string, path: string) {
+    return (
+      <Route path={path}>
+        <Tag app={this.app} class="page"></Tag>
+      </Route>
+    );
+  }
+
   render() {
     return (
       <Host>
-        <div class="page">
-          <Router.Switch>
-            <Route path="/">
-              <app-home app={this.app}></app-home>
-            </Route>
-            <Route path="/keygen">
-              <app-keygen app={this.app}></app-keygen>
-            </Route>
-            <Route path="/encrypt">
-              <app-encrypt app={this.app}></app-encrypt>
-            </Route>
-            <Route path="/decrypt">
-              <app-decrypt app={this.app}></app-decrypt>
-            </Route>
-          </Router.Switch>
-        </div>
+        <Router.Switch>
+          {this.renderRoute('app-home', '/')}
+          {this.renderRoute('app-keygen', '/keygen')}
+          {this.renderRoute('app-encrypt', '/encrypt')}
+          {this.renderRoute('app-decrypt', '/decrypt')}
+        </Router.Switch>
         <footer>
           <div class="title">{this.app.msgs.footer.title}</div>
           <div class="copy">&copy;suzulabo</div>

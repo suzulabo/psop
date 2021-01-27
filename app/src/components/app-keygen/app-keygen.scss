@@ -2,6 +2,7 @@ app-keygen {
   header {
     padding: 20px;
     text-align: center;
+    font-size: 1.1rem;
   }
 
   main {
@@ -12,6 +13,10 @@ app-keygen {
     max-width: 400px;
     margin: 20px auto;
     text-align: center;
+
+    button {
+      margin-top: 20px;
+    }
   }
 
   .key-box {
@@ -76,7 +81,7 @@ app-keygen {
   }
 
   .back-btn {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
   }
 }

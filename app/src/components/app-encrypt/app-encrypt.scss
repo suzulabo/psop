@@ -2,6 +2,7 @@ app-encrypt {
   header {
     padding: 20px;
     text-align: center;
+    font-size: 1.1rem;
   }
 
   main {
@@ -18,6 +19,7 @@ app-encrypt {
   }
 
   section.file-select {
+    margin-top: 20px;
     text-align: center;
     input {
       display: none;

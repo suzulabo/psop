@@ -2,6 +2,7 @@ app-decrypt {
   header {
     padding: 20px;
     text-align: center;
+    font-size: 1.1rem;
   }
 
   main {
@@ -19,6 +20,7 @@ app-decrypt {
   }
 
   section.file-select {
+    margin-top: 20px;
     text-align: center;
     input {
       display: none;
