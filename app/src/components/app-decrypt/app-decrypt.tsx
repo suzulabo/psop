@@ -125,7 +125,7 @@ export class AppDecrypt {
           </section>
           <section class="secret-passwd">
             <input
-              type="password"
+              type="text"
               placeholder={this.app.msgs.decrypt.sercretPasswd}
               value={this.secretPasswd}
               onInput={this.handleSecretPasswdInput}

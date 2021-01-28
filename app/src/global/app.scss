@@ -10,15 +10,17 @@ html {
   --bk-overlay-color: rgba(0, 0, 0, 0.3);
 }
 
+html,
 body {
   background-color: var(--bk-color);
+  font-size: 15px;
+  height: 100%;
 }
 
 html,
 textarea,
 input {
   font-family: sans-serif;
-  font-size: 15px;
   color: var(--color);
 
   /* Support for all WebKit browsers. */
@@ -32,6 +34,8 @@ input {
 }
 
 input {
+  font-size: 16px;
+
   border: none;
   width: 100%;
 

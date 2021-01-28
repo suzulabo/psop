@@ -79,7 +79,7 @@ export class AppEncrypt {
         <main>
           <section class="passwd">
             <input
-              type="password"
+              type="text"
               placeholder={this.app.msgs.encrypt.publicPasswd}
               value={this.passwd}
               onInput={this.handlePasswdInput}
