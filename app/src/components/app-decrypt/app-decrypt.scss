@@ -40,9 +40,14 @@ app-decrypt {
 
     .files {
       margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       a {
-        font-size: 1.1rem;
+        padding: 20px;
+        font-size: 1.2rem;
         text-decoration: underline;
+        word-break: break-all;
       }
     }
   }
