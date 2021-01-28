@@ -56,6 +56,9 @@ export class AppRoot {
       case '/decrypt':
         this.app.setTitle(this.app.msgs.decrypt.title + suffix);
         break;
+      case '/usage':
+        this.app.setTitle(this.app.msgs.usage.title + suffix);
+        break;
       default:
         this.app.setTitle(this.app.msgs.home.title + suffix);
         break;
@@ -78,6 +81,7 @@ export class AppRoot {
           {this.renderRoute('app-keygen', '/keygen')}
           {this.renderRoute('app-encrypt', '/encrypt')}
           {this.renderRoute('app-decrypt', '/decrypt')}
+          {this.renderRoute('app-usage', '/usage')}
         </Router.Switch>
         <footer>
           <div class="title">{this.app.msgs.footer.title}</div>

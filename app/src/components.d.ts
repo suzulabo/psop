@@ -26,6 +26,9 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface AppUsage {
+        "app": App;
+    }
 }
 declare global {
     interface HTMLApIconElement extends Components.ApIcon, HTMLStencilElement {
@@ -70,6 +73,12 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLAppUsageElement extends Components.AppUsage, HTMLStencilElement {
+    }
+    var HTMLAppUsageElement: {
+        prototype: HTMLAppUsageElement;
+        new (): HTMLAppUsageElement;
+    };
     interface HTMLElementTagNameMap {
         "ap-icon": HTMLApIconElement;
         "ap-loading": HTMLApLoadingElement;
@@ -78,6 +87,7 @@ declare global {
         "app-home": HTMLAppHomeElement;
         "app-keygen": HTMLAppKeygenElement;
         "app-root": HTMLAppRootElement;
+        "app-usage": HTMLAppUsageElement;
     }
 }
 declare namespace LocalJSX {
@@ -100,6 +110,9 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface AppUsage {
+        "app"?: App;
+    }
     interface IntrinsicElements {
         "ap-icon": ApIcon;
         "ap-loading": ApLoading;
@@ -108,6 +121,7 @@ declare namespace LocalJSX {
         "app-home": AppHome;
         "app-keygen": AppKeygen;
         "app-root": AppRoot;
+        "app-usage": AppUsage;
     }
 }
 export { LocalJSX as JSX };
@@ -121,6 +135,7 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-keygen": LocalJSX.AppKeygen & JSXBase.HTMLAttributes<HTMLAppKeygenElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "app-usage": LocalJSX.AppUsage & JSXBase.HTMLAttributes<HTMLAppUsageElement>;
         }
     }
 }

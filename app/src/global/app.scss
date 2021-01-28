@@ -54,7 +54,7 @@ input {
 }
 
 a {
-  &:hover:not(.button) {
+  &:not(.button) {
     text-decoration: underline;
   }
 }

@@ -23,6 +23,7 @@ export class AppHome {
           <a class="button full-width" {...href('decrypt')}>
             {this.app.msgs.home.decrypt}
           </a>
+          <a {...href('usage')}>{this.app.msgs.home.usage}</a>
         </div>
       </Host>
     );

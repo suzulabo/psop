@@ -1,3 +1,5 @@
+import { usageContent } from './msg-html.ja';
+
 export const msgs = {
   common: {
     titleSuffix: ' - パスワード先に送ります',
@@ -11,6 +13,7 @@ export const msgs = {
     keygen: 'パスワード作成',
     encrypt: '暗号化',
     decrypt: '暗号化解除',
+    usage: '使い方',
   },
   keygen: {
     title: 'パスワード作成',
@@ -31,6 +34,10 @@ export const msgs = {
     sercretPasswd: '秘密のパスワードを貼り付け',
     fileSelectBtn: 'ファイルを選択',
     completed: '暗号化を解除しました！',
+  },
+  usage: {
+    title: '使い方',
+    usageContent: usageContent,
   },
   errors: {
     decryptFile: {
