@@ -158,7 +158,7 @@ export class AppDecrypt {
         </main>
         {this.decrypting && (
           <ap-loading>
-            <ap-icon icon="shield-lock"></ap-icon>
+            <ap-icon icon="unlock"></ap-icon>
           </ap-loading>
         )}
       </Host>
