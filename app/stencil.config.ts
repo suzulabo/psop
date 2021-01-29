@@ -16,7 +16,7 @@ const buildSrc = () => {
   if (commitId && branchName) {
     return `${branchName}/${commitId}`;
   }
-  return process.env['_SRCVAR'];
+  return 'local build';
 };
 
 export const config: Config = {
