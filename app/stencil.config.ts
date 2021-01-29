@@ -41,6 +41,5 @@ export const config: Config = {
   ],
   devServer: {
     openBrowser: false,
-    port: 3370,
   },
 };
