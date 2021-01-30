@@ -15,13 +15,19 @@ export class AppHome {
       <Host>
         <div class="lniks">
           <a class="button full-width" {...href('keygen')}>
-            {this.app.msgs.home.keygen}
+            <ap-icon icon="key" />
+            <span>{this.app.msgs.home.keygen}</span>
+            <ap-icon icon="key" />
           </a>
           <a class="button full-width" {...href('encrypt')}>
-            {this.app.msgs.home.encrypt}
+            <ap-icon icon="shield-lock" />
+            <span>{this.app.msgs.home.encrypt}</span>
+            <ap-icon icon="shield-lock" />
           </a>
           <a class="button full-width" {...href('decrypt')}>
-            {this.app.msgs.home.decrypt}
+            <ap-icon icon="unlock" />
+            <span>{this.app.msgs.home.decrypt}</span>
+            <ap-icon icon="unlock" />
           </a>
           <a {...href('usage')}>{this.app.msgs.home.usage}</a>
         </div>
