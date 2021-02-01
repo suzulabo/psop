@@ -3,6 +3,15 @@
     "public": "app/www",
     "headers": [
       {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=602"
+          }
+        ]
+      },
+      {
         "source": "/build/@(app.esm.js|app.js)",
         "headers": [
           {
@@ -17,15 +26,6 @@
           {
             "key": "Cache-Control",
             "value": "max-age=31556952, s-maxage=31556952, immutable"
-          }
-        ]
-      },
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=601"
           }
         ]
       }
