@@ -1,9 +1,38 @@
 {
   "hosting": {
     "public": "app/www",
-    "rewrites": [
+    "headers": [
+      {
+        "source": "/build/@(app.esm.js|app.js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=30"
+          }
+        ]
+      },
+      {
+        "source": "/build/p-*",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31556952, s-maxage=31556952, immutable"
+          }
+        ]
+      },
       {
         "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=600"
+          }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/@(|keygen|encrypt|decrypt|usage)",
         "destination": "/index.html"
       }
     ]
