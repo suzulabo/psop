@@ -1,0 +1,22 @@
+app-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .lniks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+
+    a {
+      margin-bottom: 40px;
+
+      display: flex;
+      justify-content: center;
+      span {
+        flex-grow: 1;
+      }
+    }
+  }
+}
