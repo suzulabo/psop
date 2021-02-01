@@ -21,15 +21,11 @@ const buildSrc = () => {
 
 export const config: Config = {
   globalScript: 'src/global/app.ts',
-  globalStyle: 'src/global/app.scss',
   taskQueue: 'async',
   outputTargets: [
     {
       type: 'www',
-      serviceWorker: {
-        swSrc: 'src/sw.js',
-        globPatterns: ['**/*.{js,css,json,html,ico,png}'],
-      },
+      serviceWorker: null,
     },
   ],
   plugins: [
