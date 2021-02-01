@@ -2,7 +2,7 @@
   "name": "psop-app",
   "private": true,
   "scripts": {
-    "build": "stencil build",
+    "build": "rm -rf www && stencil build",
     "start": "stencil build --dev --watch --serve",
     "start.sw": "stencil build --dev --watch --serve --service-worker",
     "test": "stencil test --spec --e2e",
