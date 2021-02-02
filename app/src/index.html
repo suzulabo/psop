@@ -15,9 +15,45 @@
     <script nomodule src="/build/app.js"></script>
 
     <link rel="icon" href="data:," />
+
+    <style>
+      html.hydrated .splash {
+        display: none;
+      }
+      .splash {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 5%;
+
+        font-size: 40px;
+        font-family: serif;
+        opacity: 0;
+
+        animation: splash_blink 3s linear infinite;
+      }
+
+      @keyframes splash_blink {
+        0% {
+          opacity: 0;
+        }
+        33% {
+          opacity: 0;
+        }
+        66% {
+          opacity: 0.5;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <app-root></app-root>
+    <div class="splash">PSOP</div>
   </body>
 </html>
